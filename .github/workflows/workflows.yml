@@ -2,8 +2,8 @@ name: HTTP Status Check
 
 # Trigger the action on push or manually
 on:
-  push:
-  workflow_dispatch:
+    push:
+    workflow_dispatch:
 
 jobs:
   check_http_status:
