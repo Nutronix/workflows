@@ -11,19 +11,11 @@ jobs:
 
     steps:
       - name: Check repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install dependencies (if required)
-        run: npm ci  # Nur nötig, wenn dein Projekt Node.js-Module erfordert
+        uses: actions/checkout@v2
 
       - name: Check URL Status
         run: |
-          response=$(curl -o /dev/null -s -w "%{http_code}\n" https://httpstat.us/500)
+          response=$(curl -o /dev/null -s -w "%{http_code}\n" https://localhost:8080/v1/dataset)
           echo "HTTP Status Code: $response"
           if [ "$response" -ne 200 ]; then
             echo "Unexpected HTTP status code. Expected 200."
