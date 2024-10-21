@@ -17,7 +17,7 @@ jobs:
         run: |
           response=$(curl -o dev/null -s -w "%{http_code}\n" https://httpstat.us/500)
           echo "HTTP Status Code: $response"
-          if ["$response" -ne 200]; then
+          if [ "$response" -ne 200]; then
             echo "Unexpected HTTP status code. Expected 200."
             exit 1
           
