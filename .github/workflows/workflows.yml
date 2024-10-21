@@ -11,11 +11,11 @@ jobs:
 
     steps:
       - name: Check repository
-        uses: action/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Check URL Status
         run: |
-          response=$(curl -o dev/null/ -s -w "%{http://localhost:8080/gretting}\n" https://httpstat.us/500)
+          response=$(curl -o dev/null/ -s -w "%{http_code}\n" https://httpstat.us/500)
           echo "HTTP Status Code: $response"
           if ["$response" -ne 200 ]; then
             echo "Unexpected HTTP status code. Expected 200."
