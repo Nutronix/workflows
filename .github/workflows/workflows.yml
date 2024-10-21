@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies (if required)
+        run: npm ci  # Nur nötig, wenn dein Projekt Node.js-Module erfordert
+
       - name: Check URL Status
         run: |
           response=$(curl -o /dev/null -s -w "%{http_code}\n" https://httpstat.us/500)
