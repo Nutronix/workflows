@@ -1,25 +1,21 @@
-import requests
+on: [push]
+jobs:
+  docker-compose:
+    runs-on: ubuntu-latest
 
-def check_http_status(url):
-    try:
-        response = requests.get(url)
-        status_code = response.status_code
-        print(f"HTTP Status Code: {status_code}")
-        
-        if status_code != 200:
-            print("Unexpected HTTP status code. Expected 200.")
-            return False
-        else:
-            print("The website returned the expected 200 status code.")
-            return True
-    except requests.exceptions.RequestException as e:
-        print(f"An error occurred: {e}")
-        return False
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-
-if __name__ == "__main__":
-    url_to_check = "https://httpstat.us/500"
-    is_successful = check_http_status(url_to_check)
-    
-    if not is_successful:
-        exit(1)
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+      
+          
+      - name: Set up Docker Compose
+        run: |
+            sudo apt-get update
+            sudo apt-get install docker-compose -y
+      
+      - name: Build and run Docker Compose
+        run: |
+            docker-compose up --build -d
