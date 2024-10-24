@@ -53,7 +53,6 @@ def send_result_to_api(result):
     else:
         raise Exception(f"Failed to send result: {response.status_code}")
 
-# Hauptprogramm
 def main():
     # Daten von der API abrufen
     data = get_data_from_api()
